@@ -1,11 +1,9 @@
 import axios from "axios"
 
-/**
- * All requests go through the Vite proxy in development, so the browser sees
- * one origin. That keeps the Django session cookie and CSRF flow simple.
- */
 const api = axios.create({
-  baseURL: "/api",
+  baseURL: import.meta.env.DEV
+    ? "/api"
+    : "https://ethio-discoveries-api.onrender.com/api",
   withCredentials: true,
   xsrfCookieName: "csrftoken",
   xsrfHeaderName: "X-CSRFToken",
